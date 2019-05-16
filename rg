@@ -9,15 +9,15 @@ cat << END
       |___/   
 A command line tool for managing default Azure resource groups
 Author: Lee Cattarin - github.com/lee0c
-v0.0.4
+v0.0.5
 
     rg              : Lists all resource groups in the current Azure subscription. The 
                         default resource group, if set, will be highlighted. Any
                         managed cluster (such as those used for AKS) or cluster tagged
                         with "rgcli_deprioritize" will be de-prioritized.
     rg <NAME>       : Sets the given resource group as default for Azure CLI commands. 
-    rg [-u|--unset] : Removes any configured default resource group.
-    rg [-h|--help]  : Displays this text.
+    rg -u, --unset  : Removes any configured default resource group.
+    rg -h, --help   : Displays this text.
 END
 }
 
