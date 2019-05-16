@@ -26,4 +26,4 @@ Aka, download this, give it executable permisions, and create a link from your b
 | rg | Lists all resource groups in the current Azure subscription. The default resource group, if set, will be highlighted. Any managed cluster (such as those used for AKS) or cluster tagged with "rgcli_deprioritize" will be de-prioritized. |
 | rg NAME | Sets the given resource group as default for Azure CLI commands. |
 | rg -u, --unset | Removes any configured default resource group. |
-| rg -h, --help | Displays this text. |
+| rg -h, --help | Displays help text. |
