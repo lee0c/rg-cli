@@ -32,7 +32,6 @@ fi
 if [[ $# -eq 1 ]]; then
     if [[ $1 =~ ^-h$ || $1 =~ ^--help$ ]]
     then
-        list_text=
 cat << END
   _ __ __ _   
  | '__/ _\` |  
@@ -41,24 +40,33 @@ cat << END
       |___/   
 A command line tool for managing default Azure resource groups
 Author: Lee Cattarin - github.com/lee0c
-v0.0.1
+v0.0.3
 
     rg              : Lists all resource groups in the current Azure subscription. The 
                         default resource group, if set, will be highlighted. Any
                         managed cluster (such as those used for AKS) or cluster tagged
                         with "rgcli_deprioritize" will be de-prioritized.
-    rg NAME         : Sets the given resource group as default for Azure CLI commands. 
+    rg <NAME>       : Sets the given resource group as default for Azure CLI commands. 
+    rg [-u|--unset] : Removes any configured default resource group.
     rg [-h|--help]  : Displays this text.
 END
+        exit 0
+    fi
+
+    if [[ $1 =~ ^-u$ || $1 =~ ^--unset$ ]]
+    then
+        az configure --defaults group=''
+        echo "Default resource group unset"
+        exit 0
+    fi
+
+    # Check if group exists 
+    if [[ $(az group exists --name $1) ]]
+    then
+        # Set group as current context
+        az configure --defaults group=$1
+        echo "Default resource group set to $1"
     else
-        # Check if group exists 
-        if [[ $(az group exists --name $1) ]]
-        then
-            # Set group as current context
-            az configure --defaults group=$1
-            echo "Default resource group set to $1"
-        else
-            echo "Specified resource group doesn't exist in the current subscription"
-        fi
+        echo "Specified resource group doesn't exist in the current subscription"
     fi
 fi
