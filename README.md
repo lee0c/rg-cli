@@ -1,5 +1,7 @@
 # `rg`
 
+![screen capture of a terminal showing sample rg commands: the help text, unsetting the default resource group, setting the default resource group and listing resource groups with the default highlighted](./screencap.png)
+
 This started as an attempt to use the Azure CLI alias extension in order to easily view resource groups and get/set a default resource group. With those aliases set up, however, I wanted a few more features:
 
 - The ability to not only filter out managed clusters such as those created by AKS from a primary list of resource groups, but also filter out resource groups I had tagged as not interesting or not important. Unless I set a tag on every resource group, querying by tag just resulted in errors due to null objects.
