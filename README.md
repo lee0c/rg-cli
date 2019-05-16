@@ -14,7 +14,7 @@ Currently, this tool is just a bash script. If you can run a bash script, you ca
 ```bash
 git clone https://github.com/lee0c/rg-cli.git
 chmod +x rg
-ln -s ./rg-cli/rg /usr/bin/local/rg
+ln -s ./rg-cli/rg /usr/local/bin/rg
 ```
 
 Aka, download this, give it executable permisions, and create a link from your binaries directory to `rg` so you can run it from any directory.
