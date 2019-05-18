@@ -9,7 +9,7 @@ cat << END
       |___/   
 A command line tool for managing default Azure resource groups
 Author: Lee Cattarin - github.com/lee0c
-v0.0.6
+v0.1.0
 
     rg              : Lists all resource groups in the current Azure subscription. The 
                         default resource group, if set, will be highlighted. Any
