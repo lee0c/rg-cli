@@ -9,7 +9,7 @@ cat << END
       |___/   
 A command line tool for managing default Azure resource groups
 Author: Lee Cattarin - github.com/lee0c
-v0.0.5
+v0.0.6
 
     rg              : Lists all resource groups in the current Azure subscription. The 
                         default resource group, if set, will be highlighted. Any
@@ -58,37 +58,33 @@ then
     done
 fi
 
-# Handle arguments with - at the beginning
-if [[ $# = 1 && $1 =~ ^-.* ]]
-then
-    if [[ $1 = "-h" || $1 =~ "--help" ]]
-    then
+# Handle all other arguments
+while [[ $# > 0 ]]
+do
+    case $1 in
+    -h|--help)
         help-text
-    elif [[ $1 =~ "-u" || $1 =~ "--unset" ]]
-    then
+        exit 0
+        ;;
+    -u|--unset)
         az configure --defaults group=''
         echo "Default resource group unset"
-    else
+        exit 0
+        ;;
+    -*)
         error-text
-    fi
-    exit 0
-fi
-
-# All other arguments are treated as a potential name
-if [[ $# = 1 ]]
-then
-    # Check if group exists 
-    if [[ $(az group exists --name $1) ]]
-    then
-        # Set group as current context
-        az configure --defaults group=$1
-        echo "Default resource group set to $1"
-    else
-        echo "Specified resource group doesn't exist in the current subscription"
-    fi
-fi
-
-if [[ $# > 1 ]]
-then
-    error-text
-fi
+        exit 0
+        ;;
+    *)
+        if [[ $(az group exists --name $1) ]]
+        then
+            # Set group as current context
+            az configure --defaults group=$1
+            echo "Default resource group set to $1"
+        else
+            echo "Specified resource group doesn't exist in the current subscription"
+        fi
+        exit 0
+        ;;
+    esac
+done
