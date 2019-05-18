@@ -15,16 +15,17 @@ Currently, this tool is just a bash script. If you can run a bash script, you ca
 
 ```bash
 git clone https://github.com/lee0c/rg-cli.git
+cd rg-cli
 chmod +x rg
-ln -s ./rg-cli/rg /usr/local/bin/rg
+ln -s /path/to/rg-cli/rg /usr/local/bin/rg
 ```
 
 Aka, download this, give it executable permisions, and create a link from your binaries directory to `rg` so you can run it from any directory.
 
 ## Use
 
-| Command | |
-| ------- | --- |
+| Commands | |
+| :------- | --- |
 | rg | Lists all resource groups in the current Azure subscription. The default resource group, if set, will be highlighted. Any managed cluster (such as those used for AKS) or cluster tagged with "rgcli_deprioritize" will be de-prioritized. |
 | rg NAME | Sets the given resource group as default for Azure CLI commands. |
 | rg -u, --unset | Removes any configured default resource group. |
