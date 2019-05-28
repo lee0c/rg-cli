@@ -9,7 +9,7 @@ cat << END
       |___/   
 A command line tool for managing default Azure resource groups
 Author: Lee Cattarin - github.com/lee0c
-v0.1.1
+v0.1.2
 
     rg              : Lists all resource groups in the current Azure subscription. The 
                         default resource group, if set, will be highlighted. Any
@@ -76,8 +76,10 @@ do
         exit 0
         ;;
     *)
-        if [[ $(az group exists --name $1) = true ]]
+        echo $1
+        if [[ $(az group exists --name $1 -o tsv) = true ]]
         then
+
             # Set group as current context
             az configure --defaults group=$1
             echo "Default resource group set to $1"
